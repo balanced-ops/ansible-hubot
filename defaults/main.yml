@@ -1,8 +1,8 @@
 ---
-hubot_dir: /opt/hubot
 hubot_user: hubot
 hubot_group: hubot
 
+hubot_dir: /opt/hubot
 hubot_src_dir: "{{ hubot_dir }}/src"
 
 hubot_adapter: hipchat

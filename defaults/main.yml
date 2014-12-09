@@ -4,39 +4,29 @@ hubot_group: hubot
 
 hubot_dir: /opt/hubot
 
+hubot_version: ^2.10.0
 hubot_adapter: hipchat
 hubot_botname: wubot
 
+hubot_scripts:
+  - base64.coffee
+
 hubot_node_packages:
-  - cheerio
-  - clark
-  - cleverbot-node
-  - htmlparser
+  - hubot-help
+  - hubot-scripts
+  - hubot-google-images
+  - hubot-google-translate
   - hubot-calculator
   - hubot-hipchat
   - hubot-hipchat-emoticons
-  - hubot-scripts
-  - nodepie
-  - querystring
-  - redis@0.8.4
-  - soupselect
 
-hubot_version: ^2.10.0
+hubot_external_scripts:
+  - hubot-help
+  - hubot-google-images
+  - hubot-google-translate
+  - hubot-calculator
+  - hubot-hipchat-emoticons
 
-hubot_dependencies:
-  hubot-diagnostics: 0.0.1
-  hubot-google-images: ^0.1.1
-  hubot-google-translate: ^0.1.0
-  hubot-help: ^0.1.1
-  hubot-hipchat: ^2.7.5
-  hubot-maps: 0.0.0
-  hubot-pugme: ^0.1.0
-  hubot-rules: ^0.1.0
-  hubot-shipit: ^0.1.1
-  hubot-youtube: ^0.1.2
-  hubot-scripts: ^2.5.16
-  hubot-calculator: '>=0.3.0'
-  hubot-hipchat-emoticons: '>=1.3.0'
 
 hubot_runtime_environment_variables:
   - {key: "HUBOT_HIPCHAT_DEBUG", value: "FIXME"}        # Replace with boolean value
@@ -53,5 +43,3 @@ hubot_runtime_environment_variables:
   # Weather stuff
   - {key: "HUBOT_WUNDERGROUND_API_KEY", value: "FIXME"} # Replace with Wunderground API key
 
-hubot_scripts:
-  - base64.coffee

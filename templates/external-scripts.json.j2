@@ -1,5 +1,5 @@
 [
-{% for dependency in hubot_dependencies.iterkeys() %}
-    "{{ dependency }}" {{- ',' if not loop.last else '' }}
+{% for script in hubot_external_scripts %}
+    "{{ script }}" {{- ',' if not loop.last else '' }}
 {% endfor %}
 ]

@@ -2,10 +2,10 @@
 # handlers file for ansible-hubot
 
 - name: restart hubot
-  service: name=hubot state=restarted
+  command: sv restart hubot
 
 - name: start hubot
-  service: name=hubot state=started
+  command: sv start hubot
 
 - name: stop hubot
-  service: name=hubot state=stopped
+  command: sv stop hubot

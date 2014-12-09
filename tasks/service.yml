@@ -17,7 +17,6 @@
     group={{ hubot_group }}
   with_items: hubot_runtime_environment_variables
 
-# 50_hubot.sh..?
 - name: install hubot service
   template: src=sv-hubot-run.j2 dest=/etc/service/hubot/run mode=0744
 

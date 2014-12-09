@@ -5,59 +5,21 @@
 - name: install user
   include: user.yml
 
-# install
-- name: clone hubot
+- name: install hubot
+  include: hubot.yml
+
+- name: install service scripts
+  include: service.yml
+
+# post task - will change often..
+- name: clone hubot scripts
   sudo_user: hubot
   git: >
-    repo=git://github.com/github/hubot.git
-    dest={{ hubot_src_dir }}
+    repo=git://github.com/balanced-ops/balanced-hubot-scripts.git
+    dest={{ hubot_dir }}/scripts
     accept_hostkey=yes
 
-- name: install hubot dependencies
-  npm: name={{ item }} path={{ hubot_dir }} state=present
-  sudo_user: hubot
-  with_items:
-    - yo
-    - generator-hubot
-    - coffee-script
-
-- name: make hubot
-  sudo_user: hubot
-  shell: yo hubot chdir={{ hubot_src_dir }} executable=/bin/bash
-  environment:
-    PATH: "{{ hubot_dir }}/node_modules/.bin:{{ ansible_env.PATH }}"
-
-- name: install hubot dependencies
-  sudo_user: hubot
-  npm: name={{ item }} path={{ hubot_dir }} state=present
-  with_items: hubot_node_packages
-
-- name: update package status
-  sudo_user: hubot
-  shell: npm update --save chdir={{ hubot_dir }} executable=/bin/bash
-
-# configure
-- name: Define Hubot environment
-  template: src=hubot.env.j2 dest={{ hubot_dir }}/{{ hubot_identity }}.env
-  notify:
-    - restart hubot
-
-- name: install Hubot start script
-  template: src=sv-hubot-run.j2 dest=/etc/my_init.d/50_hubot.sh mode=0744
-
-- name: install Hubot scripts
-  copy: src=scripts/ dest={{ hubot_dir }}/scripts owner={{ hubot_user }} mode=0644
-
-- name: configure Hubot scripts
+- name: configure hubot scripts
   template: src=hubot-scripts.json.j2 dest={{ hubot_dir }}/hubot-scripts.json
   notify:
     - restart hubot
-
-- name: Configure Hubot external scripts
-  sudo: False
-  copy: >
-    src=external-scripts.json
-    dest={{ hubot_dir }}/external-scripts.json
-    owner={{ hubot_user }}
-    group={{ hubot_user }}
-    mode=0644

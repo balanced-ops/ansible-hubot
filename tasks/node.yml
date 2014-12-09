@@ -4,3 +4,6 @@
 
 - name: apt-get update and install NodeJS
   apt: pkg=nodejs state=present update_cache=true
+
+- name: apt-get libicu-dev
+  apt: pkg=libicu-dev state=present

@@ -21,3 +21,6 @@
     mode=0755
   with_items:
   - "{{ hubot_dir }}"
+  - /etc/service/hubot
+  - /etc/service/hubot/log
+

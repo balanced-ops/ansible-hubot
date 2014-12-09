@@ -1,0 +1,43 @@
+---
+- name: install hubot dependencies
+  npm: name={{ item }} path={{ hubot_dir }} state=present
+  sudo_user: hubot
+  with_items:
+    - coffee-script
+    - hubot
+
+# create hubot scaffolding
+- name: create bin directory
+  sudo_user: hubot
+  file: dest={{ hubot_dir }}/bin state=directory
+
+- name: use hubot exec wrapper
+  sudo_user: hubot
+  template: src=scaffolds/hubot.j2 dest={{ hubot_dir }}/bin/hubot mode=0755
+
+- name: create hubot external scripts
+  sudo_user: hubot
+  template: >
+    src=external-scripts.json.j2
+    dest={{ hubot_dir }}/external-scripts.json
+    owner={{ hubot_user }}
+    group={{ hubot_user }}
+    mode=0644
+
+- name: create hubot package.json
+  sudo_user: hubot
+  template: >
+    src=package.json.j2
+    dest={{ hubot_dir }}/package.json
+    owner={{ hubot_user }}
+    group={{ hubot_user }}
+    mode=0644
+
+- name: install hubot dependencies
+  sudo_user: hubot
+  npm: name="{{ item }}" path={{ hubot_dir }} state=present
+  with_items: hubot_node_packages
+
+- name: update package status
+  sudo_user: hubot
+  shell: npm update --save chdir={{ hubot_dir }} executable=/bin/bash

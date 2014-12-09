@@ -1,2 +1,23 @@
 ---
-# defaults file for ansible-hubot
+hubot_dir: /opt/hubot
+hubot_user: hubot
+hubot_group: hubot
+
+hubot_src_dir: "{{ hubot_dir }}/src"
+
+hubot_adapter: hipchat
+hubot_identity: hubot
+
+hubot_node_packages:
+  - cheerio
+  - clark
+  - cleverbot-node
+  - htmlparser
+  - hubot-calculator
+  - hubot-hipchat
+  - hubot-hipchat-emoticons
+  - hubot-scripts
+  - nodepie
+  - querystring
+  - redis@0.8.4
+  - soupselect

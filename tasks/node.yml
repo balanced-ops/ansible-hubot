@@ -1,0 +1,6 @@
+---
+- name: "Add Chris Lea's Node.js Repository"
+  apt_repository: repo=ppa:chris-lea/node.js
+
+- name: apt-get update and install NodeJS
+  apt: pkg=nodejs state=present update_cache=true

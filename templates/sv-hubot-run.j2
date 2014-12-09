@@ -1,0 +1,8 @@
+#!/bin/sh
+
+exec 2>&1
+export PATH={{ hubot_dir }}:$PATH
+cd {{ hubot_dir }}
+exec chpst -u {{ hubot_user }} -U {{ hubot_user }} -e "{{ hubot_dir }}" \
+  env HOME="{{ hubot_dir }}" \
+  bin/hubot --name {{ hubot_identity }} --adapter {{ hubot_adapter }}

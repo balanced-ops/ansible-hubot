@@ -1,0 +1,23 @@
+---
+
+- name: create hubot group
+  group: name={{ hubot_group }} state=present
+
+- name: create hubot user
+  user: >
+    name={{ hubot_user }}
+    group={{ hubot_group }}
+    password=no
+    system=yes
+    home={{ hubot_dir }}
+    state=present
+
+- name: dirs
+  file: >
+    path={{ item }}
+    owner={{ hubot_user }}
+    group={{ hubot_group }}
+    state=directory
+    mode=0755
+  with_items:
+  - "{{ hubot_dir }}"

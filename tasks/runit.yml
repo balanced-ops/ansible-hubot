@@ -1,0 +1,24 @@
+---
+# runtime
+- name: create hubot secrets environment path for runit
+  file: >
+    path={{ hubot_secrets_dir }}
+    owner={{ hubot_secrets_dir_user }}
+    group={{ hubot_secrets_dir_group }}
+    state=directory
+    mode=0755
+
+- name: write out all environment variables
+  copy: >
+    dest={{ hubot_secrets_dir}}/{{ item.key }}
+    content={{ item.value }}
+    mode=0400
+    owner={{ hubot_secrets_dir_user }}
+    group={{ hubot_secrets_dir_group }}
+  with_items: hubot_runtime_environment_variables
+
+- name: install hubot service for runit
+  template: src=sv-hubot-run.j2 dest=/etc/service/hubot/run mode=0744
+
+- name: install hubot logging service for runit
+  template: src=sv-hubot-log-run.j2 dest=/etc/service/hubot/log/run mode=0744

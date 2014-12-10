@@ -3,42 +3,41 @@ hubot_user: hubot
 hubot_group: hubot
 
 hubot_dir: /opt/hubot
+hubot_secrets_dir: "{{ hubot_dir }}/env"
+hubot_secrets_dir_user: "{{ hubot_user }}"  # To override
+hubot_secrets_dir_group: "{{ hubot_group }}"  # To override
 
 hubot_version: ^2.10.0
 hubot_adapter: hipchat
 hubot_botname: wubot
 
-hubot_scripts:
-  - base64.coffee
-
+# used to install packages into hubot, by default,
+# the chat adapter is hipchat
 hubot_node_packages:
   - hubot-help
   - hubot-scripts
-  - hubot-google-images
-  - hubot-google-translate
-  - hubot-calculator
   - hubot-hipchat
-  - hubot-hipchat-emoticons
 
+# used to generate hubot-scripts.json
+hubot_scripts:
+  - base64.coffee
+
+# used to generate external-scripts.json
 hubot_external_scripts:
   - hubot-help
-  - hubot-google-images
-  - hubot-google-translate
-  - hubot-calculator
-  - hubot-hipchat-emoticons
 
+# this is where we generally would put defaults for hubot scripts
+# that make sense.
+#
+# you should override this as follows:
+# hubot_runtime_environment_variables:
+#   - key: ENV_VAR_NAME
+#     value: SOME_VALUE
+#
+# this is a good place to put secret api keys etc
 hubot_runtime_environment_variables:
-  - {key: "HUBOT_HIPCHAT_DEBUG", value: "FIXME"}        # Replace with boolean value
-  - {key: "HUBOT_AUTH_ADMIN", value: "FIXME"}           # Replace with hubot admin username
-  - {key: "HUBOT_HIPCHAT_JOIN_ROOMS_ON_INVITE", value: "FIXME"} # Replace with boolean value
+  - key: HUBOT_HIPCHAT_JID
+    value: FIXMEPLZ
 
-  # HipChat stuff
-  - {key: "HUBOT_HIPCHAT_TOKEN", value: "FIXME"}        # Replace with HipChat auth token
-  - {key: "HUBOT_HIPCHAT_JID", value: "FIXME"}          # Replace with HipChat Jabber ID
-  - {key: "HUBOT_HIPCHAT_NAME", value: "FIXME"}         # Replace with HipChat user name
-  - {key: "HUBOT_HIPCHAT_PASSWORD", value: "FIXME"}     # Replace with HipChat password
-  - {key: "HUBOT_HIPCHAT_ROOMS", value: "FIXME"}        # Comma separated list of rooms to join
-
-  # Weather stuff
-  - {key: "HUBOT_WUNDERGROUND_API_KEY", value: "FIXME"} # Replace with Wunderground API key
-
+  - key: HUBOT_HIPCHAT_PASSWORD
+    value: FIXMEPLZ

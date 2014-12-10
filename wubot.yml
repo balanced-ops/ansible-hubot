@@ -1,0 +1,44 @@
+---
+- hosts: all
+  sudo: yes
+
+  vars:
+    citadel_bucket: 'balanced-citadel'
+
+  vars_files:
+    - defaults/main.yml
+    - vars/main.yml
+
+  handlers:
+    - include: handlers/main.yml
+
+  tasks:
+    - apt: package={{ item }} state=present
+      with_items:
+        - git
+        - runit
+
+    - name: install hubot
+      include: tasks/main.yml
+
+    - name: clone wubot
+      sudo_user: hubot
+      git: >
+        repo=git://github.com/balanced-ops/wubot.git
+        dest={{ hubot_dir }}/wubot
+        accept_hostkey=yes
+
+    - name: install wubot scripts
+      sudo_user: hubot
+      shell: >
+        make install DEST="{{ hubot_dir }}/scripts"
+        chdir={{ hubot_dir }}/wubot
+
+    - name: configure hubot scripts
+      template: >
+        src=templates/hubot-scripts.json.j2
+        dest={{ hubot_dir }}/hubot-scripts.json
+        owner={{ hubot_user }}
+        group={{ hubot_group}}
+      notify:
+        - restart hubot

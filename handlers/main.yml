@@ -2,10 +2,10 @@
 # handlers file for ansible-hubot
 
 - name: restart hubot
-  shell: 'hash sv 2>/dev/null && sv restart hubot || true'
+  shell: sv restart hubot
 
 - name: start hubot
-  shell: 'hash sv 2>/dev/null && sv start hubot || true'
+  shell: sv start hubot
 
 - name: stop hubot
-  shell: 'hash sv 2>/dev/null && sv stop hubot || true'
+  shell: sv stop hubot

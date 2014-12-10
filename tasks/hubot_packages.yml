@@ -1,0 +1,24 @@
+---
+
+- name: install hubot node packages & dependencies
+  sudo_user: hubot
+  shell: npm install --save {{ item }} chdir={{ hubot_dir }}
+  with_items: hubot_node_packages
+
+- name: create hubot external scripts
+  sudo_user: hubot
+  template: >
+    src=external-scripts.json.j2
+    dest={{ hubot_dir }}/external-scripts.json
+    owner={{ hubot_user }}
+    group={{ hubot_user }}
+    mode=0644
+
+- name: update package status
+  sudo_user: hubot
+  shell: npm update --save chdir={{ hubot_dir }} executable=/bin/bash
+
+- name: configure hubot scripts
+  template: >
+    src=hubot-scripts.json.j2
+    dest={{ hubot_dir }}/hubot-scripts.json

@@ -8,18 +8,9 @@
 - name: install hubot
   include: hubot.yml
 
-- name: install service scripts
-  include: service.yml
+- name: install hubot packages
+  include: hubot_packages.yml
 
-# post task - will change often..
-- name: clone hubot scripts
-  sudo_user: hubot
-  git: >
-    repo=git://github.com/balanced-ops/wubot.git
-    dest={{ hubot_dir }}/scripts
-    accept_hostkey=yes
-
-- name: configure hubot scripts
-  template: src=hubot-scripts.json.j2 dest={{ hubot_dir }}/hubot-scripts.json
-  notify:
-    - restart hubot
+# TODO: should be optional w/ along other process managers like supervisor..
+- name: install runit service scripts
+  include: runit.yml

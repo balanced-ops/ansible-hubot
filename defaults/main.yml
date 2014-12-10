@@ -27,7 +27,6 @@ hubot_external_scripts:
   - hubot-calculator
   - hubot-hipchat-emoticons
 
-
 hubot_runtime_environment_variables:
   - {key: "HUBOT_HIPCHAT_DEBUG", value: "FIXME"}        # Replace with boolean value
   - {key: "HUBOT_AUTH_ADMIN", value: "FIXME"}           # Replace with hubot admin username

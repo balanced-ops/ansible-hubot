@@ -15,7 +15,7 @@
 - name: clone hubot scripts
   sudo_user: hubot
   git: >
-    repo=git://github.com/balanced-ops/balanced-hubot-scripts.git
+    repo=git://github.com/balanced-ops/wubot.git
     dest={{ hubot_dir }}/scripts
     accept_hostkey=yes
 

@@ -41,3 +41,10 @@
 - name: update package status
   sudo_user: hubot
   shell: npm update --save chdir={{ hubot_dir }} executable=/bin/bash
+
+- name: configure hubot scripts
+  template: >
+    src=hubot-scripts.json.j2
+    dest={{ hubot_dir }}/hubot-scripts.json
+  notify:
+    - restart hubot

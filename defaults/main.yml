@@ -35,9 +35,8 @@ hubot_external_scripts:
 #     value: SOME_VALUE
 #
 # this is a good place to put secret api keys etc
-hubot_runtime_environment_variables:
-  - key: HUBOT_HIPCHAT_JID
-    value: FIXMEPLZ
-
-  - key: HUBOT_HIPCHAT_PASSWORD
-    value: FIXMEPLZ
+#
+# hipchat requires these environment variables to be set:
+# - HUBOT_HIPCHAT_JID
+# - HUBOT_HIPCHAT_PASSWORD
+hubot_runtime_environment_variables: []

@@ -3,6 +3,8 @@
 exec 2>&1
 export PATH={{ hubot_dir }}/node_modules/.bin:$PATH
 cd {{ hubot_dir }}
+export HUBOT_NAME={{  hubot_botname }}
+export HUBOT_ADAPTER={{  hubot_adapter }}
 exec chpst -u {{ hubot_user }} -U {{ hubot_user }} \
            -e "{{ hubot_secrets_dir }}"            \
-           env HOME="{{ hubot_dir }}" bin/hubot --name {{ hubot_botname }} --adapter {{ hubot_adapter }}
+           env HOME="{{ hubot_dir }}" bin/hubot

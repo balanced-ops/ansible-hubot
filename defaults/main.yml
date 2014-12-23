@@ -39,4 +39,6 @@ hubot_external_scripts:
 # hipchat requires these environment variables to be set:
 # - HUBOT_HIPCHAT_JID
 # - HUBOT_HIPCHAT_PASSWORD
+#
+# the values *can not* be overridden at a later time
 hubot_runtime_environment_variables: []
